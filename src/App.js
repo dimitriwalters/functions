@@ -20,8 +20,8 @@ var data = {
 class LabeledSlider extends Component {
   render() {
     return (
-      <div>
-        <span>Label</span>
+      <div style={{padding: '0 15px'}}>
+        <span>{this.props.label}</span>
         <Slider style={{width: 200}} />
       </div>
     )
@@ -32,20 +32,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>MBTI</h1>
-        <BarChart data={data} width="778" height="389" responsive="true" />
         <MuiThemeProvider>
-          <div style={{display: 'flex', justifyContent: 'center'}}>
+          <div style={{display: 'flex', justifyContent: 'center', marginTop: '30px', marginBottom: '-18px'}}>
             <div>
-              <LabeledSlider />
-              <LabeledSlider />
+              <LabeledSlider label="Introversion v. Extroversion" />
+              <LabeledSlider label="Sensing v. Intuition" />
             </div>
             <div>
-              <LabeledSlider />
-              <LabeledSlider />
+              <LabeledSlider label="Feeling v. Thinking" />
+              <LabeledSlider label="Perceiving v. Judging" />
             </div>
           </div>
         </MuiThemeProvider>
+        <BarChart data={data} width="778" height="389" responsive="true" />
       </div>
     );
   }
