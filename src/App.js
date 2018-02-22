@@ -22,7 +22,7 @@ class LabeledSlider extends Component {
     return (
       <div style={{padding: '0 15px'}}>
         <span>{this.props.label}</span>
-        <Slider style={{width: 200}} />
+        <Slider value={this.props.value} onChange={this.props.onChange} style={{width: 200}} />
       </div>
     )
   }
