@@ -4,7 +4,7 @@ import Slider from 'material-ui/Slider';
 import './App.css';
 
 var BarChart = require("react-chartjs").Bar;
-var data = {
+var defaultData = {
   labels: ["Si", "Se", "Ni", "Ne", "Fi", "Fe", "Ti", "Te"],
   datasets: [
     {
@@ -29,22 +29,46 @@ class LabeledSlider extends Component {
 }
 
 class App extends Component {
+  state = {
+    attitudeSlider: 0.5,
+    perceivingSlider: 0.5,
+    judgingSlider: 0.5,
+    lifestyleSlider: 0.5,
+    data: defaultData,
+  };
+
+  handleAttitudeSlider = (event, value) => {
+    this.setState({attitudeSlider: value});
+  };
+
+  handlePerceivingSlider = (event, value) => {
+    this.setState({perceivingSlider: value});
+  };
+
+  handleJudgingSlider = (event, value) => {
+    this.setState({judgingSlider: value});
+  };
+
+  handleLifestyleSlider = (event, value) => {
+    this.setState({lifestyleSlider: value});
+  };
+
   render() {
     return (
       <div className="App">
         <MuiThemeProvider>
           <div style={{display: 'flex', justifyContent: 'center', marginTop: '30px', marginBottom: '-18px'}}>
             <div>
-              <LabeledSlider label="Introversion v. Extroversion" />
-              <LabeledSlider label="Sensing v. Intuition" />
+              <LabeledSlider value={this.state.attitudeSlider} onChange={this.handleAttitudeSlider} label="Introversion v. Extroversion" />
+              <LabeledSlider value={this.state.perceivingSlider} onChange={this.handlePerceivingSlider} label="Sensing v. Intuition" />
             </div>
             <div>
-              <LabeledSlider label="Feeling v. Thinking" />
-              <LabeledSlider label="Perceiving v. Judging" />
+              <LabeledSlider value={this.state.judgingSlider} onChange={this.handleJudgingSlider} label="Feeling v. Thinking" />
+              <LabeledSlider value={this.state.lifestyleSlider} onChange={this.handleLifestyleSlider} label="Perceiving v. Judging" />
             </div>
           </div>
         </MuiThemeProvider>
-        <BarChart data={data} width="778" height="389" responsive="true" />
+        <BarChart data={this.state.data} width="778" height="389" responsive="true" />
       </div>
     );
   }
