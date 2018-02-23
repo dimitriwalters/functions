@@ -4,7 +4,7 @@ import Slider from 'material-ui/Slider';
 import './App.css';
 
 var BarChart = require("react-chartjs").Bar;
-var defaultData = {
+var defaultDataset = {
   labels: ["Si", "Se", "Ni", "Ne", "Fi", "Fe", "Ti", "Te"],
   datasets: [
     {
@@ -16,6 +16,15 @@ var defaultData = {
     }
   ]
 };
+const SI = 0, SE = 1, NI = 2, NE = 3, FI = 4, FE = 5, TI = 6, TE = 7;
+
+function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+function oneMinus(i) {
+  return 1 - i;
+}
 
 class LabeledSlider extends Component {
   render() {
@@ -34,23 +43,90 @@ class App extends Component {
     perceivingSlider: 0.5,
     judgingSlider: 0.5,
     lifestyleSlider: 0.5,
-    data: defaultData,
+    dataset: defaultDataset,
   };
 
+  calculateDataset = (values) => {
+    var dataset = clone(defaultDataset);
+    var data = dataset['datasets'][0]['data']
+
+    var siFormula = oneMinus(values.attitudeSlider)
+    siFormula += oneMinus(values.perceivingSlider)
+    siFormula += oneMinus(values.lifestyleSlider)
+    siFormula /= 3
+
+    var seFormula = values.attitudeSlider
+    seFormula += oneMinus(values.perceivingSlider)
+    seFormula += oneMinus(values.lifestyleSlider)
+    seFormula /= 3
+
+    var niFormula = oneMinus(values.attitudeSlider)
+    niFormula += values.perceivingSlider
+    niFormula += oneMinus(values.lifestyleSlider)
+    niFormula /= 3
+
+    var neFormula = values.attitudeSlider
+    neFormula += values.perceivingSlider
+    neFormula += oneMinus(values.lifestyleSlider)
+    neFormula /= 3
+
+    var fiFormula = oneMinus(values.attitudeSlider)
+    fiFormula += oneMinus(values.judgingSlider)
+    fiFormula += values.lifestyleSlider
+    fiFormula /= 3
+
+    var feFormula = values.attitudeSlider
+    feFormula += oneMinus(values.judgingSlider)
+    feFormula += values.lifestyleSlider
+    feFormula /= 3
+
+    var tiFormula = oneMinus(values.attitudeSlider)
+    tiFormula += values.judgingSlider
+    tiFormula += values.lifestyleSlider
+    tiFormula /= 3
+
+    var teFormula = values.attitudeSlider
+    teFormula += values.judgingSlider
+    teFormula += values.lifestyleSlider
+    teFormula /= 3
+
+    data[SI] = 100 * siFormula
+    data[SE] = 100 * seFormula
+    data[NI] = 100 * niFormula
+    data[NE] = 100 * neFormula
+    data[FI] = 100 * fiFormula
+    data[FE] = 100 * feFormula
+    data[TI] = 100 * tiFormula
+    data[TE] = 100 * teFormula
+    return dataset
+  }
+
   handleAttitudeSlider = (event, value) => {
-    this.setState({attitudeSlider: value});
+    var state = this.state
+    state['attitudeSlider'] = value
+    state['dataset'] = this.calculateDataset(state)
+    this.setState(state);
   };
 
   handlePerceivingSlider = (event, value) => {
-    this.setState({perceivingSlider: value});
+    var state = this.state
+    state['perceivingSlider'] = value
+    state['dataset'] = this.calculateDataset(state)
+    this.setState(state);
   };
 
   handleJudgingSlider = (event, value) => {
-    this.setState({judgingSlider: value});
+    var state = this.state
+    state['judgingSlider'] = value
+    state['dataset'] = this.calculateDataset(state)
+    this.setState(state);
   };
 
   handleLifestyleSlider = (event, value) => {
-    this.setState({lifestyleSlider: value});
+    var state = this.state
+    state['lifestyleSlider'] = value
+    state['dataset'] = this.calculateDataset(state)
+    this.setState(state);
   };
 
   render() {
@@ -68,7 +144,7 @@ class App extends Component {
             </div>
           </div>
         </MuiThemeProvider>
-        <BarChart data={this.state.data} width="778" height="389" responsive="true" />
+        <BarChart data={this.state.dataset} width="778" height="389" responsive="true" />
       </div>
     );
   }
