@@ -8,10 +8,10 @@ var defaultDataset = {
   labels: ["Si", "Se", "Ni", "Ne", "Fi", "Fe", "Ti", "Te"],
   datasets: [
     {
-      fillColor: "rgba(220,220,220,0.5)",
-      strokeColor: "rgba(220,220,220,0.8)",
-      highlightFill: "rgba(220,220,220,0.75)",
-      highlightStroke: "rgba(220,220,220,1)",
+      fillColor: "rgba(0,188,212,0.5)",
+      strokeColor: "rgba(0,188,212,0.8)",
+      highlightFill: "rgba(0,188,212,0.75)",
+      highlightStroke: "rgba(0,188,212,1)",
       data: [50, 50, 50, 50, 50, 50, 50, 50]
     }
   ]
