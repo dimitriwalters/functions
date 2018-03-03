@@ -52,7 +52,7 @@ class App extends Component {
 
     var siFormula = oneMinus(values.attitudeSlider)
     siFormula += oneMinus(values.perceivingSlider)
-    siFormula += oneMinus(values.lifestyleSlider)
+    siFormula += values.lifestyleSlider
     siFormula /= 3
 
     var seFormula = values.attitudeSlider
@@ -62,7 +62,7 @@ class App extends Component {
 
     var niFormula = oneMinus(values.attitudeSlider)
     niFormula += values.perceivingSlider
-    niFormula += oneMinus(values.lifestyleSlider)
+    niFormula += values.lifestyleSlider
     niFormula /= 3
 
     var neFormula = values.attitudeSlider
@@ -72,7 +72,7 @@ class App extends Component {
 
     var fiFormula = oneMinus(values.attitudeSlider)
     fiFormula += oneMinus(values.judgingSlider)
-    fiFormula += values.lifestyleSlider
+    fiFormula += oneMinus(values.lifestyleSlider)
     fiFormula /= 3
 
     var feFormula = values.attitudeSlider
@@ -82,7 +82,7 @@ class App extends Component {
 
     var tiFormula = oneMinus(values.attitudeSlider)
     tiFormula += values.judgingSlider
-    tiFormula += values.lifestyleSlider
+    tiFormula += oneMinus(values.lifestyleSlider)
     tiFormula /= 3
 
     var teFormula = values.attitudeSlider
