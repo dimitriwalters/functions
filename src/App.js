@@ -26,11 +26,23 @@ function oneMinus(i) {
   return 1 - i;
 }
 
+function ltHalf(v) {
+  return v < 0.5;
+}
+
+function gtHalf(v) {
+  return v > 0.5;
+}
+
 class LabeledSlider extends Component {
   render() {
     return (
       <div style={{padding: '0 15px'}}>
-        <span>{this.props.label}</span>
+        <span>
+          <span style={{fontWeight: ltHalf(this.props.value) ? 'bold' : ''}}>{this.props.leftLabel}</span>
+          <span> v. </span>
+          <span style={{fontWeight: gtHalf(this.props.value) ? 'bold' : ''}}>{this.props.rightLabel}</span>
+        </span>
         <Slider value={this.props.value} onChange={this.props.onChange} style={{width: 200}} />
       </div>
     )
@@ -135,12 +147,12 @@ class App extends Component {
         <MuiThemeProvider>
           <div style={{display: 'flex', justifyContent: 'center', marginTop: '30px', marginBottom: '-18px'}}>
             <div>
-              <LabeledSlider value={this.state.attitudeSlider} onChange={this.handleAttitudeSlider} label="Introversion v. Extroversion" />
-              <LabeledSlider value={this.state.perceivingSlider} onChange={this.handlePerceivingSlider} label="Sensing v. Intuition" />
+              <LabeledSlider value={this.state.attitudeSlider} onChange={this.handleAttitudeSlider} leftLabel="Introversion" rightLabel="Extroversion" />
+              <LabeledSlider value={this.state.perceivingSlider} onChange={this.handlePerceivingSlider} leftLabel="Sensing" rightLabel="Intuition" />
             </div>
             <div>
-              <LabeledSlider value={this.state.judgingSlider} onChange={this.handleJudgingSlider} label="Feeling v. Thinking" />
-              <LabeledSlider value={this.state.lifestyleSlider} onChange={this.handleLifestyleSlider} label="Perceiving v. Judging" />
+              <LabeledSlider value={this.state.judgingSlider} onChange={this.handleJudgingSlider} leftLabel="Feeling" rightLabel="Thinking" />
+              <LabeledSlider value={this.state.lifestyleSlider} onChange={this.handleLifestyleSlider} leftLabel="Perceiving" rightLabel="Judging" />
             </div>
           </div>
         </MuiThemeProvider>
