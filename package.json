@@ -2,7 +2,7 @@
   "name": "mbti",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://dimitriwalters.github.io/mbti",
+  "homepage": "https://dimitriwalters.github.io/functions",
   "dependencies": {
     "chart.js": "^1.1.1",
     "gh-pages": "^1.1.0",
